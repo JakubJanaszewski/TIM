@@ -10,4 +10,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enums\" />
+    <Folder Include="Events\" />
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+
 </Project>
