@@ -6,10 +6,7 @@ using Blog.Domain.Entities;
 namespace Blog.Application.Tags.Commands.DeleteTag;
 
 [Authorize(Roles = Roles.Administrator)]
-public record DeleteTagCommand : IRequest
-{
-    public required string Name { get; init; }
-}
+public record DeleteTagCommand(string Name) : IRequest { }
 
 public class DeleteTagCommandHandler(IApplicationDbContext context) : IRequestHandler<DeleteTagCommand>
 {

@@ -86,5 +86,26 @@ public class ApplicationDbContextInitialiser
                 await _userManager.AddToRolesAsync(administrator, new [] { administratorRole.Name });
             }
         }
+
+        //Seed tags
+        if (!_context.Tags.Any())
+        {
+            _context.Tags.AddRange([
+                new Tag()
+                {
+                    Name = "Sport"
+                },
+                new Tag()
+                {
+                    Name = "Polityka"
+                },
+                new Tag()
+                {
+                    Name = "Nauka"
+                }
+            ]);
+
+            await _context.SaveChangesAsync();
+        }
     }
 }
