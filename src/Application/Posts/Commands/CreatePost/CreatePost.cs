@@ -9,7 +9,7 @@ namespace Blog.Application.Posts.Commands.CreatePost;
 public record CreatePostCommand : IRequest
 {
     public required string Title { get; init; }
-    public byte[]? Image { get; init; }
+    public string? Image { get; init; }
     public required string Content { get; init; }
     public CoordinateDto? Coordinate { get; init; }
     public required List<string> Tags { get; init; }

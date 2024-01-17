@@ -592,7 +592,6 @@
           },
           "image": {
             "type": "string",
-            "format": "byte",
             "nullable": true
           },
           "content": {
@@ -654,7 +653,6 @@
           },
           "image": {
             "type": "string",
-            "format": "byte",
             "nullable": true
           },
           "content": {
