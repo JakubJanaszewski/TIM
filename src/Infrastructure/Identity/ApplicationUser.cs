@@ -5,5 +5,5 @@ namespace Blog.Infrastructure.Identity;
 
 public class ApplicationUser : IdentityUser
 {
-    public List<BlogPage> Blogs { get; set; } = null!;
+    public List<Post> Blogs { get; set; } = null!;
 }

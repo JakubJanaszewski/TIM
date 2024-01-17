@@ -4,7 +4,11 @@ namespace Blog.Application.Common.Interfaces;
 
 public interface IApplicationDbContext
 {
-    DbSet<BlogPage> Blogs { get; }
+    DbSet<Post> Posts { get; }
+
+    DbSet<Tag> Tags { get; }
+
+    DbSet<Coordinate> Coordinates { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

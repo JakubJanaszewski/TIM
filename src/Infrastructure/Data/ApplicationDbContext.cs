@@ -11,7 +11,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-    public DbSet<BlogPage> Blogs => Set<BlogPage>();
+    public DbSet<Post> Posts => Set<Post>();
+
+    public DbSet<Tag> Tags => Set<Tag>();
+
+    public DbSet<Coordinate> Coordinates => Set<Coordinate>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
