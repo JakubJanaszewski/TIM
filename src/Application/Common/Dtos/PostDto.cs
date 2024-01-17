@@ -1,7 +1,6 @@
-﻿using Blog.Application.Posts.Queries.GetPosts;
-using Blog.Domain.Entities;
+﻿using Blog.Domain.Entities;
 
-namespace Blog.Application.Blogs.Queries.GetBlogs;
+namespace Blog.Application.Common.Dtos;
 public class PostDto
 {
     public required string Title { get; init; }

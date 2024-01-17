@@ -1,7 +1,7 @@
 ﻿using Blog.Application.Blogs.Queries.GetBlogs;
 using Blog.Domain.Entities;
 
-namespace Blog.Application.Posts.Queries.GetPosts;
+namespace Blog.Application.Common.Dtos;
 public class CoordinateDto
 {
     public double Latitude { get; init; }

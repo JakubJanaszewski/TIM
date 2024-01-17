@@ -1,7 +1,7 @@
-﻿using Blog.Application.Common.Interfaces;
+﻿using Blog.Application.Common.Dtos;
+using Blog.Application.Common.Interfaces;
 using Blog.Application.Common.Mappings;
 using Blog.Application.Common.Models;
-using Blog.Domain.Entities;
 
 namespace Blog.Application.Blogs.Queries.GetBlogs;
 
