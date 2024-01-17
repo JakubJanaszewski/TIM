@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240117174340_Init")]
+    [Migration("20240117194706_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -53,6 +53,7 @@ namespace Blog.Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApplicationUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Content")
@@ -336,7 +337,9 @@ namespace Blog.Infrastructure.Data.Migrations
                 {
                     b.HasOne("Blog.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany("Blogs")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Blog.Domain.Entities.Coordinate", "Coordinate")
                         .WithMany()

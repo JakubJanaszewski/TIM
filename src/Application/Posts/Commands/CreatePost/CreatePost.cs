@@ -15,9 +15,10 @@ public record CreatePostCommand : IRequest
     public required List<string> Tags { get; init; }
 }
 
-public class CreatePostCommandHandler(IApplicationDbContext context) : IRequestHandler<CreatePostCommand>
+public class CreatePostCommandHandler(IApplicationDbContext context, IUser user) : IRequestHandler<CreatePostCommand>
 {
     private readonly IApplicationDbContext _context = context;
+    private readonly IUser _user = user;
 
     public async Task Handle(CreatePostCommand request, CancellationToken cancellationToken)
     {
@@ -32,7 +33,8 @@ public class CreatePostCommandHandler(IApplicationDbContext context) : IRequestH
             Image = request.Image,
             Content = request.Content,
             Coordinate = coordinate,
-            Tags = tags
+            Tags = tags,
+            ApplicationUserId = _user.Id!
         };
 
         _context.Posts.Add(post);

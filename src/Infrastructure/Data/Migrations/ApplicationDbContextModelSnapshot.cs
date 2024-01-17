@@ -50,6 +50,7 @@ namespace Blog.Infrastructure.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApplicationUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Content")
@@ -333,7 +334,9 @@ namespace Blog.Infrastructure.Data.Migrations
                 {
                     b.HasOne("Blog.Infrastructure.Identity.ApplicationUser", null)
                         .WithMany("Blogs")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Blog.Domain.Entities.Coordinate", "Coordinate")
                         .WithMany()

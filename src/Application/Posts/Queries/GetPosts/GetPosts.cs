@@ -3,7 +3,7 @@ using Blog.Application.Common.Interfaces;
 using Blog.Application.Common.Mappings;
 using Blog.Application.Common.Models;
 
-namespace Blog.Application.Blogs.Queries.GetBlogs;
+namespace Blog.Application.Blogs.Queries.GetPosts;
 
 public record GetPostsWithPaginationQuery : IRequest<PaginatedList<PostDto>>
 {
@@ -11,7 +11,7 @@ public record GetPostsWithPaginationQuery : IRequest<PaginatedList<PostDto>>
     public int PageSize { get; init; } = 10;
 }
 
-public class GetTodoItemsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper) : IRequestHandler<GetPostsWithPaginationQuery, PaginatedList<PostDto>>
+public class GetPostsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper) : IRequestHandler<GetPostsWithPaginationQuery, PaginatedList<PostDto>>
 {
     private readonly IApplicationDbContext _context = context;
     private readonly IMapper _mapper = mapper;

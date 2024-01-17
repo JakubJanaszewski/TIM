@@ -3,7 +3,7 @@
 namespace Blog.Application.Common.Dtos;
 public class TagDto
 {
-    public int Name { get; init; }
+    public required string Name { get; init; }
 
     private class Mapping : Profile
     {
