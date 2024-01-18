@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Blog.Application.Common.Behaviours;
+using Blog.Application.Common.Dtos;
 using Blog.Application.Common.Interfaces;
 using Blog.Application.Common.Services;
 
@@ -13,6 +14,14 @@ public static class DependencyInjection
 
         services.AddHttpClient();
         services.AddTransient<IGeocodingService, GeocodingService>();
+        services.AddSingleton(provider => new MapperConfiguration(cfg =>
+        {
+            cfg.AddProfile(new PostDtoMapping(provider.CreateScope().ServiceProvider.GetService<IIdentityService>()!));
+            cfg.AddProfile(new TagDtoMapping());
+            cfg.AddProfile(new UserDtoMapping());
+            cfg.AddProfile(new ExtendedUserDtoMapping());
+
+        }).CreateMapper());
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

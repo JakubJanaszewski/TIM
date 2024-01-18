@@ -11,10 +11,11 @@ public record GetPostsByTagsWithPaginationQuery : IRequest<PaginatedList<PostDto
     public string? Tags { get; set; }
 }
 
-public class GetPostsByTagsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper) : IRequestHandler<GetPostsByTagsWithPaginationQuery, PaginatedList<PostDto>>
+public class GetPostsByTagsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper, IIdentityService identityService) : IRequestHandler<GetPostsByTagsWithPaginationQuery, PaginatedList<PostDto>>
 {
     private readonly IApplicationDbContext _context = context;
     private readonly IMapper _mapper = mapper;
+    private readonly IIdentityService _identityService = identityService;
 
     public async Task<PaginatedList<PostDto>> Handle(GetPostsByTagsWithPaginationQuery request, CancellationToken cancellationToken)
     {

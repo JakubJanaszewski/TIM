@@ -4,12 +4,12 @@ namespace Blog.Application.Common.Dtos;
 public class TagDto
 {
     public required string Name { get; init; }
+}
 
-    private class Mapping : Profile
+public class TagDtoMapping : Profile
+{
+    public TagDtoMapping()
     {
-        public Mapping()
-        {
-            CreateMap<Tag, TagDto>();
-        }
+        CreateMap<Tag, TagDto>();
     }
 }

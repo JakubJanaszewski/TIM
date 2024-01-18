@@ -5,12 +5,12 @@ public class UserDto
 {
     public required string? UserName { get; init; }
     public required string? Avatar { get; init; }
+}
 
-    private class Mapping : Profile
+public class UserDtoMapping : Profile
+{
+    public UserDtoMapping()
     {
-        public Mapping()
-        {
-            CreateMap<IUser, UserDto>();
-        }
+        CreateMap<IUser, UserDto>();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Blog.Domain.Entities;
+﻿using Blog.Application.Common.Interfaces;
+using Blog.Domain.Entities;
 
 namespace Blog.Application.Common.Dtos;
 public class PostDto
@@ -11,12 +12,15 @@ public class PostDto
     public required DateTimeOffset Created { get; init; }
     public required DateTimeOffset LastModified { get; init; }
     public required UserDto User { get; init; }
+}
 
-    private class Mapping : Profile
+public class PostDtoMapping : Profile
+{
+    public PostDtoMapping() { }
+
+    public PostDtoMapping(IIdentityService identityService)
     {
-        public Mapping()
-        {
-            CreateMap<Post, PostDto>();
-        }
+        CreateMap<Post, PostDto>()
+            .ForMember(x => x.User, opt => opt.MapFrom(y => identityService.GetUser(y.ApplicationUserId)));
     }
 }

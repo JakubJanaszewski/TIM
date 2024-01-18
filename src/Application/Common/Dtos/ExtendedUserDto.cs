@@ -6,12 +6,12 @@ public class ExtendedUserDto
     public required string Id { get; init; }
     public required string? UserName { get; init; }
     public required string? Avatar { get; init; }
+}
 
-    private class Mapping : Profile
+public class ExtendedUserDtoMapping : Profile
+{
+    public ExtendedUserDtoMapping()
     {
-        public Mapping()
-        {
-            CreateMap<IUser, ExtendedUserDto>();
-        }
+        CreateMap<IUser, ExtendedUserDto>();
     }
 }
