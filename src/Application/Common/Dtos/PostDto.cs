@@ -10,6 +10,7 @@ public class PostDto
     public required List<TagDto> Tags { get; init; } = null!;
     public required DateTimeOffset Created { get; init; }
     public required DateTimeOffset LastModified { get; init; }
+    public required UserDto User { get; init; }
 
     private class Mapping : Profile
     {

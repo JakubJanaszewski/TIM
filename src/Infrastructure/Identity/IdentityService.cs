@@ -1,4 +1,5 @@
-﻿using Blog.Application.Common.Interfaces;
+﻿using AutoMapper.QueryableExtensions;
+using Blog.Application.Common.Interfaces;
 using Blog.Application.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -78,4 +79,12 @@ public class IdentityService : IIdentityService
 
         return result.ToApplicationResult();
     }
+
+    public async Task<List<IUser>> GetUsersAsync()
+    {
+        List<ApplicationUser> users = await _userManager.Users.ToListAsync();
+
+        return [.. users];
+    }
+
 }

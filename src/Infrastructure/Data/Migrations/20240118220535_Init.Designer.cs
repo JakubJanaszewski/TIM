@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240118200738_Init")]
+    [Migration("20240118220535_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -106,6 +106,9 @@ namespace Blog.Infrastructure.Data.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -315,7 +318,7 @@ namespace Blog.Infrastructure.Data.Migrations
             modelBuilder.Entity("Blog.Domain.Entities.Post", b =>
                 {
                     b.HasOne("Blog.Infrastructure.Identity.ApplicationUser", null)
-                        .WithMany("Blogs")
+                        .WithMany("Posts")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -389,7 +392,7 @@ namespace Blog.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Blog.Infrastructure.Identity.ApplicationUser", b =>
                 {
-                    b.Navigation("Blogs");
+                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

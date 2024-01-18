@@ -14,4 +14,8 @@ public class CurrentUser : IUser
     }
 
     public string? Id => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+
+    public string? Avatar => throw new NotImplementedException();
+
+    public string? UserName => throw new NotImplementedException();
 }
