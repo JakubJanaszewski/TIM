@@ -71,6 +71,57 @@
         }
       }
     },
+    "/api/Posts/ByTags": {
+      "get": {
+        "tags": [
+          "Posts"
+        ],
+        "operationId": "GetPostsByTagsWithPagination",
+        "parameters": [
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 2
+          },
+          {
+            "name": "Tags",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginatedListOfPostDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Posts/{id}": {
       "delete": {
         "tags": [
