@@ -1,5 +1,4 @@
-﻿using Blog.Application.Common.Dtos;
-using Blog.Application.Common.Interfaces;
+﻿using Blog.Application.Common.Interfaces;
 using Blog.Application.Common.Security;
 using Blog.Domain.Entities;
 
@@ -11,18 +10,25 @@ public record CreatePostCommand : IRequest
     public required string Title { get; init; }
     public string? Image { get; init; }
     public required string Content { get; init; }
-    public CoordinateDto? Coordinate { get; init; }
+    public double? Latitude { get; init; }
+    public double? Longitude { get; init; }
     public required List<string> Tags { get; init; }
 }
 
-public class CreatePostCommandHandler(IApplicationDbContext context, IUser user) : IRequestHandler<CreatePostCommand>
+public class CreatePostCommandHandler(IApplicationDbContext context, IUser user, IGeocodingService geocodingService) : IRequestHandler<CreatePostCommand>
 {
     private readonly IApplicationDbContext _context = context;
     private readonly IUser _user = user;
+    private readonly IGeocodingService _geocodingService = geocodingService;
 
     public async Task Handle(CreatePostCommand request, CancellationToken cancellationToken)
     {
-        Coordinate? coordinate = request.Coordinate == null ? null : new Coordinate() { Latitude = request.Coordinate.Latitude, Longitude = request.Coordinate.Longitude };
+        string? address = null;
+        if(request.Latitude != null && request.Longitude != null)
+        {
+            address = await _geocodingService.GetAddressAsync((double)request.Latitude, (double)request.Longitude);
+        }
+
         List<Tag> tags = _context.Tags
             .Where(x => request.Tags.Contains(x.Name))
             .ToList();
@@ -32,7 +38,7 @@ public class CreatePostCommandHandler(IApplicationDbContext context, IUser user)
             Title = request.Title,
             Image = request.Image,
             Content = request.Content,
-            Coordinate = coordinate,
+            Address = address,
             Tags = tags,
             ApplicationUserId = _user.Id!
         };

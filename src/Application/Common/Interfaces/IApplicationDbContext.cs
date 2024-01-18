@@ -8,7 +8,5 @@ public interface IApplicationDbContext
 
     DbSet<Tag> Tags { get; }
 
-    DbSet<Coordinate> Coordinates { get; }
-
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

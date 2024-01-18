@@ -597,13 +597,9 @@
           "content": {
             "type": "string"
           },
-          "coordinate": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/CoordinateDto"
-              }
-            ]
+          "address": {
+            "type": "string",
+            "nullable": true
           },
           "tags": {
             "type": "array",
@@ -618,20 +614,6 @@
           "lastModified": {
             "type": "string",
             "format": "date-time"
-          }
-        }
-      },
-      "CoordinateDto": {
-        "type": "object",
-        "additionalProperties": false,
-        "properties": {
-          "latitude": {
-            "type": "number",
-            "format": "double"
-          },
-          "longitude": {
-            "type": "number",
-            "format": "double"
           }
         }
       },
@@ -658,13 +640,15 @@
           "content": {
             "type": "string"
           },
-          "coordinate": {
-            "nullable": true,
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/CoordinateDto"
-              }
-            ]
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
           },
           "tags": {
             "type": "array",

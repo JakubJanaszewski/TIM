@@ -1,5 +1,7 @@
 ﻿using System.Reflection;
 using Blog.Application.Common.Behaviours;
+using Blog.Application.Common.Interfaces;
+using Blog.Application.Common.Services;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -8,6 +10,9 @@ public static class DependencyInjection
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+        services.AddHttpClient();
+        services.AddTransient<IGeocodingService, GeocodingService>();
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 

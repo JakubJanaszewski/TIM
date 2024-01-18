@@ -51,20 +51,6 @@ namespace Blog.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Coordinates",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Latitude = table.Column<double>(type: "float", nullable: false),
-                    Longitude = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Coordinates", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tags",
                 columns: table => new
                 {
@@ -196,7 +182,7 @@ namespace Blog.Infrastructure.Data.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CoordinateId = table.Column<int>(type: "int", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Created = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -212,11 +198,6 @@ namespace Blog.Infrastructure.Data.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Posts_Coordinates_CoordinateId",
-                        column: x => x.CoordinateId,
-                        principalTable: "Coordinates",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -288,11 +269,6 @@ namespace Blog.Infrastructure.Data.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_CoordinateId",
-                table: "Posts",
-                column: "CoordinateId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PostTag_TagsId",
                 table: "PostTag",
                 column: "TagsId");
@@ -330,9 +306,6 @@ namespace Blog.Infrastructure.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Coordinates");
         }
     }
 }
