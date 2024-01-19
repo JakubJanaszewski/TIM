@@ -2,26 +2,24 @@
 using Blog.Domain.Entities;
 
 namespace Blog.Application.Common.Dtos;
-public class PostDto
+public class PostWithCommentsDto
 {
-    public required int Id { get; init; }
-    public required string Title { get; init; }
     public required string? Image { get; init; }
     public required string Content { get; init; }
     public required string? Address { get; init; }
-    public required List<TagDto> Tags { get; init; } = null!;
     public required DateTimeOffset Created { get; init; }
     public required DateTimeOffset LastModified { get; init; }
     public required UserDto User { get; init; }
+    public required List<CommentDto> Comments { get; init; }
 }
 
-public class PostDtoMapping : Profile
+public class PostWithCommentsDtoMapping : Profile
 {
-    public PostDtoMapping() { }
+    public PostWithCommentsDtoMapping() { }
 
-    public PostDtoMapping(IIdentityService identityService)
+    public PostWithCommentsDtoMapping(IIdentityService identityService)
     {
-        CreateMap<Post, PostDto>()
+        CreateMap<Post, PostWithCommentsDto>()
             .ForMember(x => x.User, opt => opt.MapFrom(y => identityService.GetUser(y.ApplicationUserId)));
     }
 }

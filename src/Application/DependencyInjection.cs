@@ -16,11 +16,14 @@ public static class DependencyInjection
         services.AddTransient<IGeocodingService, GeocodingService>();
         services.AddSingleton(provider => new MapperConfiguration(cfg =>
         {
-            cfg.AddProfile(new PostDtoMapping(provider.CreateScope().ServiceProvider.GetService<IIdentityService>()!));
+            var identityService = provider.CreateScope().ServiceProvider.GetService<IIdentityService>()!;
+
+            cfg.AddProfile(new PostDtoMapping(identityService));
             cfg.AddProfile(new TagDtoMapping());
             cfg.AddProfile(new UserDtoMapping());
             cfg.AddProfile(new ExtendedUserDtoMapping());
-
+            cfg.AddProfile(new PostWithCommentsDtoMapping(identityService));
+            cfg.AddProfile(new CommentDtoMapping(identityService));
         }).CreateMapper());
 
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

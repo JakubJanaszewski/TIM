@@ -14,6 +14,7 @@ public class Posts : EndpointGroupBase
         app.MapGroup(this)
             .MapGet(GetPostsWithPagination)
             .MapGet(GetPostsByTagsWithPagination, "/ByTags")
+            .MapGet(GetPostWithComments, "{id}")
             .MapPost(CreatePost)
             .MapDelete(DeletePost, "{id}");
     }
@@ -26,6 +27,11 @@ public class Posts : EndpointGroupBase
     public async Task<PaginatedList<PostDto>> GetPostsByTagsWithPagination(ISender sender, [AsParameters] GetPostsByTagsWithPaginationQuery query)
     {
         return await sender.Send(query);
+    }
+
+    public async Task<PostWithCommentsDto> GetPostWithComments(ISender sender, int id)
+    {
+        return await sender.Send(new GetPostWithCommentsDtoQuery(id));
     }
 
     public async Task CreatePost(ISender sender, CreatePostCommand command)
