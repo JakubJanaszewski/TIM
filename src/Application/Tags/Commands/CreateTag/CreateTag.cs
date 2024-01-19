@@ -1,7 +1,10 @@
 ﻿using Blog.Application.Common.Interfaces;
+using Blog.Application.Common.Security;
 using Blog.Domain.Entities;
 
 namespace Blog.Application.Tags.Commands.CreateTag;
+
+[Authorize]
 public record CreateTagCommand : IRequest
 {
     public required string Name { get; init; }
