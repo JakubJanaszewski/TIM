@@ -13,6 +13,7 @@ public class Users : EndpointGroupBase
         app.MapGroup(this)
             .MapGet(GetUsers)
             .MapGet(GetCurrentUser, "/Current")
+            .MapPut(UpdateUser, "{id}")
             .MapDelete(DeleteUser, "{id}")
             .MapIdentityApi<ApplicationUser>();
             
@@ -23,9 +24,20 @@ public class Users : EndpointGroupBase
         return await sender.Send(query);
     }
 
-    public async Task<UserDto> GetCurrentUser(ISender sender, [AsParameters] GetCurrentUserQuery query)
+    public async Task<ExtendedUserDto> GetCurrentUser(ISender sender, [AsParameters] GetCurrentUserQuery query)
     {
         return await sender.Send(query);
+    }
+
+    public async Task<IResult> UpdateUser(ISender sender, string id, UpdateUserCommand command)
+    {
+        if(command.Id != id)
+        {
+            Results.BadRequest();
+        }
+        
+        await sender.Send(command);
+        return Results.NoContent();
     }
 
     public async Task<IResult> DeleteUser(ISender sender, string id)
