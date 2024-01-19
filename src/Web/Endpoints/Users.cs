@@ -1,4 +1,5 @@
 ﻿using Blog.Application.Common.Dtos;
+using Blog.Application.Common.Interfaces;
 using Blog.Application.Tags.Commands.DeleteTag;
 using Blog.Application.Tags.Queries;
 using Blog.Infrastructure.Identity;
@@ -11,12 +12,18 @@ public class Users : EndpointGroupBase
     {
         app.MapGroup(this)
             .MapGet(GetUsers)
+            .MapGet(GetCurrentUser, "/Current")
             .MapDelete(DeleteUser, "{id}")
             .MapIdentityApi<ApplicationUser>();
             
     }
 
     public async Task<List<ExtendedUserDto>> GetUsers(ISender sender, [AsParameters] GetUsersQuery query)
+    {
+        return await sender.Send(query);
+    }
+
+    public async Task<UserDto> GetCurrentUser(ISender sender, [AsParameters] GetCurrentUserQuery query)
     {
         return await sender.Send(query);
     }
