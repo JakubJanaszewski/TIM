@@ -90,4 +90,14 @@ public class IdentityService : IIdentityService
 
         return [.. users];
     }
+
+    public async Task UpdateUserAsync(string userId, string newUserName, string newAvatar)
+    {
+        ApplicationUser applicationUser = _userManager.Users.Single(u => u.Id == userId);
+
+        applicationUser.UserName = newUserName;
+        applicationUser.Avatar = newAvatar;
+
+        await _userManager.UpdateAsync(applicationUser);
+    }
 }

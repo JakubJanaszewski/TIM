@@ -13,11 +13,10 @@ public record GetPostsWithPaginationQuery : IRequest<PaginatedList<PostDto>>
     public int PageSize { get; init; } = 10;
 }
 
-public class GetPostsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper, IIdentityService identityService) : IRequestHandler<GetPostsWithPaginationQuery, PaginatedList<PostDto>>
+public class GetPostsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper) : IRequestHandler<GetPostsWithPaginationQuery, PaginatedList<PostDto>>
 {
     private readonly IApplicationDbContext _context = context;
     private readonly IMapper _mapper = mapper;
-    private readonly IIdentityService _identityService = identityService;
 
     public async Task<PaginatedList<PostDto>> Handle(GetPostsWithPaginationQuery request, CancellationToken cancellationToken)
     {
