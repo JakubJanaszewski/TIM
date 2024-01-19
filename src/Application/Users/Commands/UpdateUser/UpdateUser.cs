@@ -25,6 +25,6 @@ public class UpdateUserCommandHandler(IIdentityService identityService, IUser us
             throw new ForbiddenAccessException();
         }
 
-        await _identityService.DeleteUserAsync(request.Id, request.NewUserName, request.NewAvatar);
+        await _identityService.UpdateUserAsync(request.Id, request.NewUserName!, request.NewAvatar!);
     }
 }

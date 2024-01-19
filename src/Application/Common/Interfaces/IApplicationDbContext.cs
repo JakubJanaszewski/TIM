@@ -8,5 +8,7 @@ public interface IApplicationDbContext
 
     DbSet<Tag> Tags { get; }
 
+    DbSet<Comment> Comments { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
