@@ -4,6 +4,7 @@ using Blog.Domain.Entities;
 namespace Blog.Application.Common.Dtos;
 public class PostWithCommentsDto
 {
+    public required string? Title { get; init; }
     public required string? Image { get; init; }
     public required string Content { get; init; }
     public required string? Address { get; init; }
